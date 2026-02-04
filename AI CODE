@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Health Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    textarea, select, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 15px;
+      background: #ecf0f1;
+      border-radius: 5px;
+    }
+
+    .disclaimer {
+      font-size: 12px;
+      color: #7f8c8d;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .footer {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .footer a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>AI Health Assistant</h1>
+
+    <label>Describe your symptoms</label>
+    <textarea id="symptoms" rows="4" placeholder="Example: headache, fever for 2 days..."></textarea>
+
+    <label>Age</label>
+    <input type="number" id="age" placeholder="Enter your age">
+
+    <label>Gender</label>
+    <select id="gender">
+      <option value="">Select</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+
+    <label>Symptom Severity</label>
+    <select id="severity">
+      <option>Low</option>
+      <option>Moderate</option>
+      <option>High</option>
+    </select>
+
+    <button onclick="analyzeHealth()">Analyze</button>
+
+    <div id="output" class="result" style="display:none;"></div>
+
+    <div class="disclaimer">
+      ⚠️ This tool is not a medical diagnosis. Always consult a qualified healthcare professional.
+    </div>
+
+    <div class="footer">
+      Created by <strong>Y.S.Kamaleswar</strong> |
+      <a href="https://github.com/gaming150811-afk/AI-Health-assistant-.git" target="_blank">
+        Web Server / Source Code
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function analyzeHealth() {
+      const symptoms = document.getElementById("symptoms").value;
+      const severity = document.getElementById("severity").value;
+      const output = document.getElementById("output");
+
+      if (symptoms.trim() === "") {
+        alert("Please describe your symptoms.");
+        return;
+      }
+
+      let response = `
+        <h3>Possible Insights</h3>
+        <p><strong>Symptoms:</strong> ${symptoms}</p>
+        <p><strong>Severity Level:</strong> ${severity}</p>
+        <p><strong>AI Insight:</strong> Based on your input, this could be related to common conditions such as stress, viral infection, or fatigue.</p>
+        <p><strong>Recommended Next Steps:</strong></p>
+        <ul>
+          <li>Monitor symptoms for 24–48 hours</li>
+          <li>Stay hydrated and rest</li>
+          <li>Consult a doctor if symptoms worsen</li>
+        </ul>
+      `;
+
+      if (severity === "High") {
+        response += `<p style="color:red;"><strong>⚠️ Seek medical attention immediately.</strong></p>`;
+      }
+
+      output.innerHTML = response;
+      output.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
